@@ -1,17 +1,17 @@
 import javax.swing.ImageIcon;
-
-import java.util.Arrays;
 import java.util.Random;
 
 public class MatchGameManager {
-	
-	private int[] theSequence;
 	
 	private int checkIndex = 0;
 	
 	private int colorMatch = 0;
 	
-	RandomColorSequence RCS = new RandomColorSequence();
+	private int playerScore;
+	
+	private Random randomSequence;
+	
+	private int[] generatedSequence;
 
 	public ImageIcon[] getTheColors() {
 		/*
@@ -49,7 +49,42 @@ public class MatchGameManager {
 		
 		return colorNumbers;
 	}
+	
+	public int[] generateColorSequence() {
+		/*
+		 * Method:				:	generateColorSequence()
+		 * 
+		 * Method Parameters	:	None
+		 * 
+		 * Method Return		:	ImageIcon[]
+		 * 
+		 * Synopsis				:	This method stores the colors that will be used to form
+		 * 							generated sequence that the player must match each round
+		 * 
+		 * Modifications		:	Date:		Developer:		Notes:
+		 * 							05/05/2021	Jared Shaddick	Initial Setup
+		 * 							05/06/2021	Jared Shaddick	Separated getTheColors()'s theColors Array From This Method 
+		 * 							05/10/2021	Jared Shaddick	Added 4 To Line 67 at [randomSequence.nextInt()] To Prevent 
+		 * 														Going Beyond The Length of generatedSequence (Defined At Line 62)
+		 * 							05/11/2021	Jared Shaddick	Added Comments
+		 * 							05/11/2021	Jared Shaddick	Added Conditional To Determine If The Method Should Generate A Sequence
+		 */
+		randomSequence = new Random();
+		
+		int indexGenerationCounter = 0;
+		
+		generatedSequence = new int[numberOfColors()];
+		do {
 
+			generatedSequence[indexGenerationCounter] = setColorNumbers()[randomSequence.nextInt(4)];
+			System.out.println(generatedSequence[indexGenerationCounter]);
+			indexGenerationCounter++;
+		}
+		while (indexGenerationCounter < numberOfColors());
+	
+		return generatedSequence;
+	}
+	
 	public int numberOfColors() {
 		/*
 		 * Method				:	numberOfColors()
@@ -71,14 +106,6 @@ public class MatchGameManager {
 		colorsToReplicate = 3;
 		
 		return colorsToReplicate;
-	}
-	
-	public int[] setTheSequence() {
-		int[] theSequence = new int[numberOfColors()];
-		
-		theSequence = RCS.generateColorSequence(numberOfColors(), setColorNumbers());
-		
-		return theSequence;
 	}
 	
 	public int calculatePoints(boolean colorsReplicated) {
@@ -109,6 +136,8 @@ public class MatchGameManager {
 		if (!colorsReplicated) {
 			currentUserScore = currentUserScore - levelFailScore;
 		}
+		playerScore = currentUserScore;
+		
 		return currentUserScore;
 	}
 	
@@ -133,14 +162,14 @@ public class MatchGameManager {
 		boolean AllColorsMatch;
 		
 		do {
-			if (theSequence[checkIndex] == replicaColors[checkIndex]) {
+			if (generateColorSequence()[checkIndex] == replicaColors[checkIndex]) {
 				colorMatch++;
 			}
 			checkIndex++;
 		}
-		while (checkIndex < theSequence.length);
+		while (checkIndex < generateColorSequence().length);
 	
-		if(colorMatch == theSequence.length) {
+		if(colorMatch == generateColorSequence().length) {
 			AllColorsMatch = true;
 		}
 		else
@@ -148,5 +177,15 @@ public class MatchGameManager {
 		
 		return AllColorsMatch;
 	}
-	
+	public boolean checkPoints() {
+		boolean scoreUnderZero = false;
+		
+		if (playerScore < 0) {
+			scoreUnderZero = true;
+		}
+		if (playerScore <= 0) {
+			scoreUnderZero = false;
+		}
+		return scoreUnderZero;
+	}
 }

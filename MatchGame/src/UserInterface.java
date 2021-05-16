@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -15,12 +14,12 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class UserInterface extends JFrame implements ActionListener {
 
 	
@@ -232,21 +231,26 @@ public class UserInterface extends JFrame implements ActionListener {
 			String successSound = "Audio/Success.wav";
 			playTheSound(successSound);
 		}
-		else if (!colorsMatch) {
+		else if (!colorsMatch && MGM.checkPoints() == true) {
 			lblMessageBoard.setText("Failure");
 			String failSound = "Audio/Nelson.wav";
 			playTheSound(failSound);
 		}
+		if (MGM.checkPoints() == false) {
+			lblMessageBoard.setText("Game Over");
+			String gameOverSound = "Audio/GameOver.wav";
+			playTheSound(gameOverSound);
+		}
 	}
-	private void playTheSound(String sound) {
+	private void playTheSound(String gameStateSound) {
 		try {
-			File successFile = new File(sound);
+			File soundFile = new File(gameStateSound);
 			
-			AudioInputStream successAudioFile = AudioSystem.getAudioInputStream(successFile);
+			AudioInputStream soundAudioFile = AudioSystem.getAudioInputStream(soundFile);
 			
 			Clip winClip = AudioSystem.getClip();
 			
-			winClip.open(successAudioFile);
+			winClip.open(soundAudioFile);
 			winClip.start();
 		
 		} catch (Exception e) {
@@ -258,7 +262,23 @@ public class UserInterface extends JFrame implements ActionListener {
 		btnYellowButton.setEnabled(false);
 		btnGreenButton.setEnabled(false);
 		btnStartButton.setEnabled(true);
-		gameStarted = false;
+	}
+	
+	private void startIndicator(String startSound) {
+		try {
+			File startSoundFile = new File(startSound);
+			
+			AudioInputStream startSoundAudioFile = AudioSystem.getAudioInputStream(startSoundFile);
+			
+			Clip winClip = AudioSystem.getClip();
+			
+			winClip.open(startSoundAudioFile);
+			winClip.start();
+		
+		} catch (Exception e) {
+			
+			JOptionPane.showMessageDialog(null, "Problem playing sound");
+		}
 	}
 	
 	private void replicateColors(int pressedColor) {
@@ -291,7 +311,6 @@ public class UserInterface extends JFrame implements ActionListener {
 			getGameNotificationString();
 		}
 	}
-
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -309,41 +328,38 @@ public class UserInterface extends JFrame implements ActionListener {
 		 * 							05/10/2021	Jared Shaddick	Initial Setup
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 */
-		
-		if (gameStarted) {
-			if (timeToShowColor) {
-				int colorToDisplay = MGM.setTheSequence()[colorIndex];
-				if(colorIndex < MGM.numberOfColors()) {
-					do {	
-						switch (colorToDisplay) {
-							case 0:
-								btnRedButton.setIcon(MGM.getTheColors()[0]);
-								break;
-							case 1:
-								btnBlueButton.setIcon(MGM.getTheColors()[1]);
-								break;
-							case 2:
-								btnGreenButton.setIcon(MGM.getTheColors()[2]);
-								break;
-							case 3:
-								btnYellowButton.setIcon(MGM.getTheColors()[3]);
-								break;
-						}
-					} while (colorIndex < MGM.numberOfColors());
-				}
-				else {
-					gameStarted = false;
-					colorIndex = 0;
+		if (gameStarted && timeToShowColor) {
+			if(colorIndex < MGM.numberOfColors()) {	
+				int colorToDisplay = MGM.generateColorSequence()[colorIndex];
+				switch (colorToDisplay) {
+					case 0:
+						btnRedButton.setIcon(MGM.getTheColors()[0]);
+						break;
+					case 1:
+						btnBlueButton.setIcon(MGM.getTheColors()[1]);
+						break;
+					case 2:
+						btnGreenButton.setIcon(MGM.getTheColors()[2]);
+						break;
+					case 3:
+						btnYellowButton.setIcon(MGM.getTheColors()[3]);
+						break;
 				}
 			}
 			else {
-				colorIndex++;
-				btnRedButton.setIcon(lowRed);
-				btnBlueButton.setIcon(lowBlue);
-				btnGreenButton.setIcon(lowGreen);
-				btnYellowButton.setIcon(lowYellow);
+			gameStarted = false;
+			colorIndex = 0;
+			lblMessageBoard.setText("GO!");
+			String goSound = "Audio/Go.wav";
+			startIndicator(goSound);
 			}
-		
+		}
+		else {
+			colorIndex++;
+			btnRedButton.setIcon(lowRed);
+			btnBlueButton.setIcon(lowBlue);
+			btnGreenButton.setIcon(lowGreen);
+			btnYellowButton.setIcon(lowYellow);
 		}
 		timeToShowColor = !timeToShowColor;
 	}
