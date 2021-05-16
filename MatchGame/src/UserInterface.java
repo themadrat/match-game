@@ -61,9 +61,13 @@ public class UserInterface extends JFrame implements ActionListener {
 	
 	private JLabel lblScoreDisplay = new JLabel("Score: ");
 	
+	private JLabel lblLevelUpNotifier = new JLabel("");
+	
 	MatchGameManager MGM = new MatchGameManager();
 	
 	private JButton btnStartButton = new JButton("Start");
+	
+	private JLabel lblLevelDisplay = new JLabel("Level: ");
 
 	/**
 	 * Launch the application.
@@ -182,7 +186,8 @@ public class UserInterface extends JFrame implements ActionListener {
 
 		
 		lblScoreDisplay.setFont(new Font("Tahoma", Font.PLAIN, 34));
-		lblScoreDisplay.setBounds(352, 585, 229, 64);
+		lblScoreDisplay.setBounds(270, 615, 184, 34);
+		lblScoreDisplay.setText("Score: " + playerScore);
 		contentPane.add(lblScoreDisplay);
 		
 		lblMessageBoard.setHorizontalAlignment(SwingConstants.CENTER);
@@ -207,6 +212,15 @@ public class UserInterface extends JFrame implements ActionListener {
 		btnStartButton.setBounds(401, 345, 150, 50);
 		
 		contentPane.add(btnStartButton);
+		
+		lblLevelUpNotifier.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLevelUpNotifier.setFont(new Font("Tahoma", Font.PLAIN, 39));
+		lblLevelUpNotifier.setBounds(352, 80, 250, 50);
+		contentPane.add(lblLevelUpNotifier);
+		lblLevelDisplay.setFont(new Font("Tahoma", Font.PLAIN, 34));
+		lblLevelDisplay.setBounds(464, 615, 184, 34);
+		lblLevelDisplay.setText("Level: " + MGM.setPlayerLevel());
+		contentPane.add(lblLevelDisplay);
 		
 	}
 	
@@ -240,6 +254,9 @@ public class UserInterface extends JFrame implements ActionListener {
 			lblMessageBoard.setText("Game Over");
 			String gameOverSound = "Audio/GameOver.wav";
 			playTheSound(gameOverSound);
+		}
+		if (MGM.checkLevel() == true) {
+			lblLevelUpNotifier.setText("Level Up!!!");
 		}
 	}
 	private void playTheSound(String gameStateSound) {
@@ -307,7 +324,6 @@ public class UserInterface extends JFrame implements ActionListener {
 			colorsMatch = MGM.checkColors(replicaSequence);
 			
 			playerScore = MGM.calculatePoints(colorsMatch);
-			lblScoreDisplay.setText("Score" + playerScore);
 			getGameNotificationString();
 		}
 	}
