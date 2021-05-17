@@ -35,11 +35,15 @@ public class UserInterface extends JFrame implements ActionListener {
 	
 	private boolean colorsMatch;
 	
+	private boolean colorsShown;
+	
 	private int colorIndex = 0;
 	
 	private int replicaIndex = 0;
 	
 	private int playerScore = 0;
+	
+	private int playerLevel = 1;
 	
 	private ImageIcon lowRed = new ImageIcon("Images/LowRed.png");
 	
@@ -68,6 +72,8 @@ public class UserInterface extends JFrame implements ActionListener {
 	private JButton btnStartButton = new JButton("Start");
 	
 	private JLabel lblLevelDisplay = new JLabel("Level: ");
+	
+	private int[] replicaSequence;
 
 	/**
 	 * Launch the application.
@@ -202,11 +208,15 @@ public class UserInterface extends JFrame implements ActionListener {
 				
 				btnStartButton.setEnabled(false);
 				gameStarted = true;
+				timeToShowColor = true;
 				btnRedButton.setEnabled(true);
 				btnBlueButton.setEnabled(true);
 				btnYellowButton.setEnabled(true);
 				btnGreenButton.setEnabled(true);
 				showColor.start();
+				
+				replicaSequence = new int[MGM.colorsInSequence];
+				MGM.generateColorSequence();
 			}
 		});
 		btnStartButton.setBounds(401, 345, 150, 50);
@@ -241,22 +251,33 @@ public class UserInterface extends JFrame implements ActionListener {
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 */
 		if (colorsMatch) {
+			playerScore = MGM.calculatePoints(colorsMatch);
+			lblScoreDisplay.setText("Score: " + playerScore);
 			lblMessageBoard.setText("Success");
 			String successSound = "Audio/Success.wav";
 			playTheSound(successSound);
 		}
-		else if (!colorsMatch && MGM.checkPoints() == true) {
+		if (!colorsMatch && MGM.checkPoints() == false) {
+			playerScore = MGM.calculatePoints(colorsMatch);
+			lblScoreDisplay.setText("Score: " + playerScore);
 			lblMessageBoard.setText("Failure");
 			String failSound = "Audio/Nelson.wav";
 			playTheSound(failSound);
 		}
-		if (MGM.checkPoints() == false) {
+		if (!colorsMatch && MGM.checkPoints() == true) {
+			playerScore = MGM.calculatePoints(colorsMatch);
+			lblScoreDisplay.setText("Score: " + playerScore);
 			lblMessageBoard.setText("Game Over");
 			String gameOverSound = "Audio/GameOver.wav";
 			playTheSound(gameOverSound);
 		}
-		if (MGM.checkLevel() == true) {
+		if (MGM.checkLevel() == true && colorsMatch) {
+			playerLevel = MGM.currentLevel;
+			lblLevelDisplay.setText("Level: " + playerLevel);
 			lblLevelUpNotifier.setText("Level Up!!!");
+			lblMessageBoard.setText("Success");
+			String successSound = "Audio/Success.wav";
+			playTheSound(successSound);
 		}
 	}
 	private void playTheSound(String gameStateSound) {
@@ -315,16 +336,16 @@ public class UserInterface extends JFrame implements ActionListener {
 		 * 							05/10/2021	Jared Shaddick	Initial Setup Complete
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 */
-		int[] replicaSequence = new int[MGM.numberOfColors()];
+		
 		replicaSequence[replicaIndex] = pressedColor;
 		System.out.println(replicaSequence[replicaIndex]);
 		replicaIndex++;
 		
 		if (replicaIndex == replicaSequence.length) {
 			colorsMatch = MGM.checkColors(replicaSequence);
-			
-			playerScore = MGM.calculatePoints(colorsMatch);
+
 			getGameNotificationString();
+			replicaIndex = 0;
 		}
 	}
 	
@@ -344,10 +365,17 @@ public class UserInterface extends JFrame implements ActionListener {
 		 * 							05/10/2021	Jared Shaddick	Initial Setup
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 */
+		System.out.println(gameStarted);
+		System.out.println(timeToShowColor);
+		System.out.println(colorIndex);
 		if (gameStarted && timeToShowColor) {
-			if(colorIndex < MGM.numberOfColors()) {	
-				int colorToDisplay = MGM.generateColorSequence()[colorIndex];
-				switch (colorToDisplay) {
+			if (colorsShown) {
+				colorIndex = 0;
+				colorsShown = false;
+			}
+			if(colorIndex < MGM.colorsInSequence) {	
+				//int colorToDisplay = MGM.generatedSequence[colorIndex];
+				switch (MGM.generatedSequence[colorIndex]) {
 					case 0:
 						btnRedButton.setIcon(MGM.getTheColors()[0]);
 						break;
@@ -362,16 +390,20 @@ public class UserInterface extends JFrame implements ActionListener {
 						break;
 				}
 			}
-			else {
+			else if (colorIndex == MGM.colorsInSequence){
 			gameStarted = false;
 			colorIndex = 0;
 			lblMessageBoard.setText("GO!");
 			String goSound = "Audio/Go.wav";
 			startIndicator(goSound);
+			colorsShown = true;
 			}
 		}
 		else {
-			colorIndex++;
+			if (colorIndex < MGM.colorsInSequence) {
+				colorIndex++;
+			}
+			
 			btnRedButton.setIcon(lowRed);
 			btnBlueButton.setIcon(lowBlue);
 			btnGreenButton.setIcon(lowGreen);

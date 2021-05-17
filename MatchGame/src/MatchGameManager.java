@@ -7,25 +7,27 @@ public class MatchGameManager {
 	
 	private int colorMatch = 0;
 	
-	private int playerScore;
+	public int playerScore;
 	
-	private boolean leveledUp;
+	public boolean leveledUp;
 	
-	private int colorsInSequence = 3;
+	public int colorsInSequence = numberOfColors();
 	
 	private int levelProgress = 0;
 	
 	private Random randomSequence;
 	
-	private int currentLevel = 1;
+	public int currentLevel;
 	
 	private int levelSuccessScore = 10;
 	
 	private int levelFailScore = 20;
 	
-	private int[] generatedSequence;
+	public int[] generatedSequence;
 	
-	private boolean AllColorsMatch;
+	public boolean AllColorsMatch;
+	
+	public boolean scoreUnderZero;
 
 	public ImageIcon[] getTheColors() {
 		/*
@@ -115,6 +117,8 @@ public class MatchGameManager {
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 * 							05/15/2021	Jared Shaddick	Modified Method
 		 */
+		colorsInSequence = 3;
+		
 		return colorsInSequence;
 	}
 	
@@ -137,11 +141,14 @@ public class MatchGameManager {
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 *  						05/15/2021	Jared Shaddick	Modified Method
 		 */
-		if (AllColorsMatch) {
-			playerScore = playerScore + levelSuccessScore;
+		if (colorsReplicated) {
+			playerScore += levelSuccessScore;
 		}
-		if (!AllColorsMatch) {
-			playerScore = playerScore - levelSuccessScore;
+		if (!colorsReplicated) {
+			playerScore -= levelSuccessScore;
+		}
+		if (scoreUnderZero) {
+			playerScore = 0;
 		}
 		return playerScore;
 	}
@@ -166,30 +173,34 @@ public class MatchGameManager {
 		 * 							05/15/2021	Jared Shaddick	Modified Method
 		 */
 		do {
-			if (generateColorSequence()[checkIndex] == replicaColors[checkIndex]) {
+			if (generatedSequence[checkIndex] == replicaColors[checkIndex]) {
 				colorMatch++;
 			}
 			checkIndex++;
 		}
-		while (checkIndex < generateColorSequence().length);
+		while (checkIndex < generatedSequence.length);
 	
-		if(colorMatch == generateColorSequence().length) {
+		if(colorMatch == generatedSequence.length) {
 			AllColorsMatch = true;
 		}
 		else
 		AllColorsMatch = false;
 		
+		if (!AllColorsMatch || AllColorsMatch) {
+			checkIndex = 0;
+			colorMatch = 0;
+		}
+		
 		return AllColorsMatch;
 	}
 	public boolean checkPoints() {
-		boolean scoreUnderZero = false;
 		
 		if (playerScore < 0) {
 			scoreUnderZero = true;
-		}
-		if (playerScore <= 0) {
-			scoreUnderZero = false;
 			playerScore = 0;
+		}
+		if (playerScore >= 0) {
+			scoreUnderZero = false;
 		}
 		return scoreUnderZero;
 	}
@@ -208,6 +219,10 @@ public class MatchGameManager {
 		else
 		leveledUp = false;
 		
+		if (scoreUnderZero) {
+			levelProgress = 0;
+		}
+		
 		return leveledUp;
 	}
 	public void levelUp() {
@@ -219,8 +234,19 @@ public class MatchGameManager {
 			levelProgress = 0;
 			currentLevel++;
 		}
+		if (scoreUnderZero) {
+			colorsInSequence = 3;
+			levelSuccessScore = 10;
+			levelFailScore = 20;
+			levelProgress = 0;
+			currentLevel = 1;
+		}
 	}
 	public int setPlayerLevel() {
+		currentLevel = 1;
+		if(leveledUp) {
+			currentLevel++;
+		}
 		return currentLevel;
 	}
 }
