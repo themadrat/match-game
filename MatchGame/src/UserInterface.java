@@ -43,8 +43,6 @@ public class UserInterface extends JFrame implements ActionListener {
 	
 	private int playerScore = 0;
 	
-	private int playerLevel = 1;
-	
 	private ImageIcon lowRed = new ImageIcon("Images/LowRed.png");
 	
 	private ImageIcon lowBlue = new ImageIcon("Images/LowBlue.png");
@@ -215,7 +213,7 @@ public class UserInterface extends JFrame implements ActionListener {
 				btnGreenButton.setEnabled(true);
 				showColor.start();
 				
-				replicaSequence = new int[MGM.colorsInSequence];
+				replicaSequence = new int[MGM.getColorsInSequence()];
 				MGM.generateColorSequence();
 			}
 		});
@@ -229,7 +227,7 @@ public class UserInterface extends JFrame implements ActionListener {
 		contentPane.add(lblLevelUpNotifier);
 		lblLevelDisplay.setFont(new Font("Tahoma", Font.PLAIN, 34));
 		lblLevelDisplay.setBounds(464, 615, 184, 34);
-		lblLevelDisplay.setText("Level: " + MGM.setPlayerLevel());
+		lblLevelDisplay.setText("Level: " + MGM.getCurrentLevel());
 		contentPane.add(lblLevelDisplay);
 		
 	}
@@ -251,29 +249,28 @@ public class UserInterface extends JFrame implements ActionListener {
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 */
 		if (colorsMatch) {
-			playerScore = MGM.calculatePoints(colorsMatch);
-			lblScoreDisplay.setText("Score: " + playerScore);
+			MGM.calculatePoints(colorsMatch);
+			lblScoreDisplay.setText("Score: " + MGM.getPlayerScore());
 			lblMessageBoard.setText("Success");
 			String successSound = "Audio/Success.wav";
 			playTheSound(successSound);
 		}
 		if (!colorsMatch && MGM.checkPoints() == false) {
-			playerScore = MGM.calculatePoints(colorsMatch);
-			lblScoreDisplay.setText("Score: " + playerScore);
+			MGM.calculatePoints(colorsMatch);
+			lblScoreDisplay.setText("Score: " + MGM.getPlayerScore());
 			lblMessageBoard.setText("Failure");
 			String failSound = "Audio/Nelson.wav";
 			playTheSound(failSound);
 		}
 		if (!colorsMatch && MGM.checkPoints() == true) {
-			playerScore = MGM.calculatePoints(colorsMatch);
-			lblScoreDisplay.setText("Score: " + playerScore);
+			MGM.calculatePoints(colorsMatch);
+			lblScoreDisplay.setText("Score: " + MGM.getPlayerScore());
 			lblMessageBoard.setText("Game Over");
 			String gameOverSound = "Audio/GameOver.wav";
 			playTheSound(gameOverSound);
 		}
 		if (MGM.checkLevel() == true && colorsMatch) {
-			playerLevel = MGM.currentLevel;
-			lblLevelDisplay.setText("Level: " + playerLevel);
+			lblLevelDisplay.setText("Level: " + MGM.getCurrentLevel());
 			lblLevelUpNotifier.setText("Level Up!!!");
 			lblMessageBoard.setText("Success");
 			String successSound = "Audio/Success.wav";
@@ -338,7 +335,6 @@ public class UserInterface extends JFrame implements ActionListener {
 		 */
 		
 		replicaSequence[replicaIndex] = pressedColor;
-		System.out.println(replicaSequence[replicaIndex]);
 		replicaIndex++;
 		
 		if (replicaIndex == replicaSequence.length) {
@@ -365,17 +361,14 @@ public class UserInterface extends JFrame implements ActionListener {
 		 * 							05/10/2021	Jared Shaddick	Initial Setup
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 */
-		System.out.println(gameStarted);
-		System.out.println(timeToShowColor);
-		System.out.println(colorIndex);
 		if (gameStarted && timeToShowColor) {
 			if (colorsShown) {
 				colorIndex = 0;
 				colorsShown = false;
 			}
-			if(colorIndex < MGM.colorsInSequence) {	
+			if(colorIndex < MGM.getColorsInSequence()) {	
 				//int colorToDisplay = MGM.generatedSequence[colorIndex];
-				switch (MGM.generatedSequence[colorIndex]) {
+				switch (MGM.getGeneratedSequence()[colorIndex]) {
 					case 0:
 						btnRedButton.setIcon(MGM.getTheColors()[0]);
 						break;
@@ -390,7 +383,7 @@ public class UserInterface extends JFrame implements ActionListener {
 						break;
 				}
 			}
-			else if (colorIndex == MGM.colorsInSequence){
+			else if (colorIndex == MGM.getColorsInSequence()){
 			gameStarted = false;
 			colorIndex = 0;
 			lblMessageBoard.setText("GO!");
@@ -400,7 +393,7 @@ public class UserInterface extends JFrame implements ActionListener {
 			}
 		}
 		else {
-			if (colorIndex < MGM.colorsInSequence) {
+			if (colorIndex < MGM.getColorsInSequence()) {
 				colorIndex++;
 			}
 			
