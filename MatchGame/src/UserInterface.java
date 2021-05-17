@@ -163,6 +163,27 @@ public class UserInterface extends JFrame implements ActionListener {
 		
 		btnGreenButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e3) {
+				/*
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 */
 				if (!gameStarted) {
 					replicateColors(2);
 				}
@@ -177,6 +198,16 @@ public class UserInterface extends JFrame implements ActionListener {
 		
 		btnYellowButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e4) {
+				/*
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 */
 				if (!gameStarted) {
 					replicateColors(3);
 				}
@@ -203,6 +234,18 @@ public class UserInterface extends JFrame implements ActionListener {
 		
 		btnStartButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent f) {
+				/*
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 */
 				
 				btnStartButton.setEnabled(false);
 				gameStarted = true;
@@ -278,6 +321,24 @@ public class UserInterface extends JFrame implements ActionListener {
 		}
 	}
 	private void playTheSound(String gameStateSound) {
+		/*
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		try {
 			File soundFile = new File(gameStateSound);
 			
