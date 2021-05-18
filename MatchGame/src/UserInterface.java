@@ -105,24 +105,24 @@ public class UserInterface extends JFrame implements ActionListener {
 		btnRedButton.setPressedIcon(MGM.getTheColors()[0]);
 		btnRedButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e1) {
-			/*
-			 * Method				:	actionPerformed
-			 * 
-			 * Method Parameters	:	ActionEvent e1
-			 * 
-			 * Method Return		:	Void
-			 * 
-			 * Synopsis				:	This is the first of four colored buttons that the player will use
-			 * 							to replicate the colors in the generated sequence from Match Game Manager
-			 * 
-			 * Modifications		:	Date:		Developer:		Notes:
-			 * 							05/05/2021	Jared Shaddick	Initial Setup
-			 * 							05/10/2021	Jared Shaddick	Added Ability To Change Color When Pressed 
-			 * 														And Add The Corresponding Color To An Array
-			 * 														And Added Comments
-			 */
+				/*
+				 * Method				:	actionPerformed
+				 * 
+				 * Method Parameters	:	ActionEvent e3
+				 * 
+				 * Method Return		:	Void
+				 * 
+				 * Synopsis				:	This is the first of four colored buttons that the player will use
+				 * 							to replicate the colors in the generated sequence from Match Game Manager
+				 * 
+				 * Modifications		:	Date:		Developer:		Notes:
+				 * 							05/05/2021	Jared Shaddick	Initial Setup
+				 * 							05/10/2021	Jared Shaddick	Added Ability To Change Color When Pressed 
+				 * 														And Add The Corresponding Color To An Array
+				 * 														And Added Comments
+				 * 							05/15/2021	Jared Shaddick	Changed The Way The Array Is Created For The Sake Of Simplicity
+				 */
 
-				
 				if (!gameStarted) {
 					replicateColors(0);
 				}
@@ -151,6 +151,7 @@ public class UserInterface extends JFrame implements ActionListener {
 				 * 							05/10/2021	Jared Shaddick	Added Ability To Change Color When Pressed 
 				 * 														And Add The Corresponding Color To An Array
 				 * 														And Added Comments
+				 * 							05/15/2021	Jared Shaddick	Changed The Way The Array Is Created For The Sake Of Simplicity
 				 */
 				
 				if (!gameStarted) {
@@ -164,26 +165,23 @@ public class UserInterface extends JFrame implements ActionListener {
 		btnGreenButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e3) {
 				/*
+				 * Method				:	actionPerformed
 				 * 
+				 * Method Parameters	:	ActionEvent e3
 				 * 
+				 * Method Return		:	Void
 				 * 
+				 * Synopsis				:	This is the third of four colored buttons that the player will use
+				 * 							to replicate the colors in the generated sequence from Match Game Manager
 				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
+				 * Modifications		:	Date:		Developer:		Notes:
+				 * 							05/05/2021	Jared Shaddick	Initial Setup
+				 * 							05/10/2021	Jared Shaddick	Added Ability To Change Color When Pressed 
+				 * 														And Add The Corresponding Color To An Array
+				 * 														And Added Comments
+				 * 							05/15/2021	Jared Shaddick	Changed The Way The Array Is Created For The Sake Of Simplicity
 				 */
+				
 				if (!gameStarted) {
 					replicateColors(2);
 				}
@@ -199,15 +197,23 @@ public class UserInterface extends JFrame implements ActionListener {
 		btnYellowButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e4) {
 				/*
+				 * Method				:	actionPerformed
 				 * 
+				 * Method Parameters	:	ActionEvent e3
 				 * 
+				 * Method Return		:	Void
 				 * 
+				 * Synopsis				:	This is the fourth of four colored buttons that the player will use
+				 * 							to replicate the colors in the generated sequence from Match Game Manager
 				 * 
-				 * 
-				 * 
-				 * 
-				 * 
+				 * Modifications		:	Date:		Developer:		Notes:
+				 * 							05/05/2021	Jared Shaddick	Initial Setup
+				 * 							05/10/2021	Jared Shaddick	Added Ability To Change Color When Pressed 
+				 * 														And Add The Corresponding Color To An Array
+				 * 														And Added Comments
+				 * 							05/15/2021	Jared Shaddick	Changed The Way The Array Is Created For The Sake Of Simplicity
 				 */
+				
 				if (!gameStarted) {
 					replicateColors(3);
 				}
@@ -227,7 +233,7 @@ public class UserInterface extends JFrame implements ActionListener {
 		
 		lblMessageBoard.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessageBoard.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblMessageBoard.setBounds(401, 284, 150, 50);
+		lblMessageBoard.setBounds(270, 284, 400, 50);
 		contentPane.add(lblMessageBoard);
 
 		btnStartButton.setFont(new Font("Tahoma", Font.PLAIN, 34));
@@ -235,16 +241,27 @@ public class UserInterface extends JFrame implements ActionListener {
 		btnStartButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent f) {
 				/*
+				 * Method				:	actionPerformed
 				 * 
+				 * Method Parameters	:	ActionEvent f
 				 * 
+				 * Method Return		:	void
 				 * 
+				 * Synopsis				:	This method serves as a means to begin playing the game 
+				 * 							as well as provide a means of generating a new sequence
+				 * 							for the player to replicate a generated sequence of colors
+				 * 							each time a sequence replication attempt is completed so
+				 * 							that the game may continue when the player is ready.
 				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
+				 * Modifications		:	Date:		Developer:		Notes:
+				 * 							05/05/2021	Jared Shaddick	Initial Setup
+				 * 							05/15/2021	Jared Shaddick	Added A Variable To Ensure The Privately Declared, 
+				 * 														Global, boolean Variable, timeToShowColor is true.
+				 * 							05/15/2021	Jared Shaddick	Added Line 275 To Create A New Randomly Generated
+				 * 														Color Sequence Each Time btnStartButton Is Clicked
+				 * 							05/17/2021	Jared Shaddick	Added Line 274 To Ensure That The Array That The
+				 * 														Player Creates Is Emptied Each Round.
+				 * 							05/18/2021	Jared Shaddick	Added Comments
 				 */
 				
 				btnStartButton.setEnabled(false);
@@ -322,23 +339,23 @@ public class UserInterface extends JFrame implements ActionListener {
 	}
 	private void playTheSound(String gameStateSound) {
 		/*
+		 * Method				:	playTheSound()
 		 * 
+		 * Method Parameters	:	String gameStateSound
 		 * 
+		 * Method Return		:	Void
 		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
+		 * Synopsis				:	Takes the String parameter which is set by the
+		 * 							getGameNotificationString() method (Line 295) and
+		 * 							plays the sound requested by the getGameNotificationString()
+		 * 							method.
+		 * Modifications		:	Date:		Developer:		Notes:
+		 * 							05/13/2021	Jared Shaddick	Initial Setup (Taken from the getGameNotificationString()
+		 * 																	   and modified to take any String that points
+		 * 																	   to an audio file)
+		 * 							05/18/2021	Jared Shaddick	Added Comments
 		 */
+		
 		try {
 			File soundFile = new File(gameStateSound);
 			
@@ -361,6 +378,21 @@ public class UserInterface extends JFrame implements ActionListener {
 	}
 	
 	private void startIndicator(String startSound) {
+		/*
+		 * Method				:	startIndicator()
+		 * 
+		 * Method Parameters	:	String startSound
+		 * 
+		 * Method Return		:	void
+		 * 
+		 * Synopsis				:	This method has been made separate from the getGameNotificationString() 
+		 * 							method on Line 340 as the location and the means by which this sound 
+		 * 							occurs differs from the getGameNotificationString() method.
+		 * 							
+		 * Modifications		:	Dates:		Developer:		Notes:
+		 * 							05/14/2021	Jared Shaddick	Initial Setup
+		 * 							05/18/2021	Jared Shaddick	Comments Added
+		 */
 		try {
 			File startSoundFile = new File(startSound);
 			
@@ -393,6 +425,10 @@ public class UserInterface extends JFrame implements ActionListener {
 		 * 							05/05/2021	Jared Shaddick	Initial Setup Started
 		 * 							05/10/2021	Jared Shaddick	Initial Setup Complete
 		 * 							05/11/2021	Jared Shaddick	Added Comments
+		 * 							05/17/2021	Jared Shaddick	Moved Some Lines To Different Methods
+		 * 														In The User Interface Class Where It Was
+		 * 														More Appropriate And Sensible
+		 * 							05/18/2021	Jared Shaddick	Added New Comments
 		 */
 		
 		replicaSequence[replicaIndex] = pressedColor;
@@ -421,14 +457,26 @@ public class UserInterface extends JFrame implements ActionListener {
 		 * Modifications		:	Date:		Developer:		Notes:
 		 * 							05/10/2021	Jared Shaddick	Initial Setup
 		 * 							05/11/2021	Jared Shaddick	Added Comments
+		 * 							05/14/2021	Jared Shaddick	Changed Method To Read Integer Arrays
+		 * 														And Replaced The Conditional Color Display
+		 * 														Checks With A Simpler To Understand Switch
+		 * 														Statement
+		 * 							05/15/2021	Jared Shaddick	Added Lines 483-485 To Tell The Player
+		 * 														When They Can Start Replicating The Sequence
+		 * 							05/18/2021	Jared Shaddick	Added Line 480 As A Means To Help Remind The
+		 * 														Player To Wait Until The Text And Sound Telling
+		 * 														The Player To Start Occurs
+		 *							05/18/2021	Jared Shaddick	Added Line 498 So That Text Disappears
+		 *														After It Is Displayed And Its Purpose
+		 *														Was Served
+		 *							05/18/2021	Jared Shaddick	Added New Comments
 		 */
 		if (gameStarted && timeToShowColor) {
 			if (colorsShown) {
 				colorIndex = 0;
 				colorsShown = false;
 			}
-			if(colorIndex < MGM.getColorsInSequence()) {	
-				//int colorToDisplay = MGM.generatedSequence[colorIndex];
+			if(colorIndex < MGM.getColorsInSequence()) {
 				switch (MGM.getGeneratedSequence()[colorIndex]) {
 					case 0:
 						btnRedButton.setIcon(MGM.getTheColors()[0]);
@@ -443,6 +491,7 @@ public class UserInterface extends JFrame implements ActionListener {
 						btnYellowButton.setIcon(MGM.getTheColors()[3]);
 						break;
 				}
+				lblMessageBoard.setText("Please Wait");
 			}
 			else if (colorIndex == MGM.getColorsInSequence()){
 			gameStarted = false;
@@ -457,7 +506,7 @@ public class UserInterface extends JFrame implements ActionListener {
 			if (colorIndex < MGM.getColorsInSequence()) {
 				colorIndex++;
 			}
-			
+			lblMessageBoard.setText("");
 			btnRedButton.setIcon(lowRed);
 			btnBlueButton.setIcon(lowBlue);
 			btnGreenButton.setIcon(lowGreen);

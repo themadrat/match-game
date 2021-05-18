@@ -29,34 +29,154 @@ public class MatchGameManager {
 
 	
 	public int getColorsInSequence() {
+		/*
+		 * Method				:	getColorsInSequence()
+		 * 
+		 * Method Parameters	:	None
+		 * 
+		 * Method Return		:	int
+		 * 
+		 * Synopsis				:	This method serves as a getter method which allows User Interface 
+		 * 							to refer to	the value of the integer variable, colorsInSequence 
+		 * 							that results from the numbersOfColors method without calling the original method itself.
+		 * 
+		 * Modifications		:	Date:		Developer:		Notes:
+		 * 							05/17/2021	Jared Shaddick	Initial Setup
+		 * 							05/18/2021	Jared Shaddick	Comments Added
+		 */
 		return colorsInSequence;
 	}
 
 	public void setColorsInSequence(int colorsInSequence) {
+		/*
+		 * Method				:	setColorsInSequence()
+		 * 
+		 * Method Parameters	:	int colorsInSequence
+		 * 
+		 * Method Return		:	Void
+		 * 
+		 * Synopsis				:	This method serves as the setter for the getter method, getColorsInSequence().
+		 * 
+		 * Modifications		:	Dates:		Developer:		Notes:
+		 * 							05/17/2021	Jared Shaddick	Initial Setup
+		 * 							05/18/2021	Jared Shaddick	Comments Added
+		 */
 		this.colorsInSequence = colorsInSequence;
 	}
 	
 	public int[] getGeneratedSequence() {
+		/*
+		 * Method				:	getGeneratedSequence()
+		 * 
+		 * Method Parameters	:	None
+		 * 
+		 * Method Return		:	int[]
+		 * 
+		 * Synopsis				:	This method serves as a getter method which allows User Interface 
+		 * 							to refer to	the value of the integer variable, generatedSequence, declared as a 
+		 * 							private, global variable (Line 24), Which is modified from the generateColorSequence 
+		 * 							method. This getter method serves the purpose of acquiring the color sequence the player 
+		 * 							has to replicate without calling the original method itself, which, if were the case, would
+		 * 							create a new sequence each time the method is called to display a color.
+		 * 
+		 * Modifications		:	Date:		Developer:		Notes:
+		 * 							05/17/2021	Jared Shaddick	Initial Setup
+		 * 							05/18/2021	Jared Shaddick	Comments Added
+		 */
 		return generatedSequence;
 	}
 
 	public void setGeneratedSequence(int[] generatedSequence) {
+		/*
+		 * Method				:	setGeneratedSequence()
+		 * 
+		 * Method Parameters	:	int[] generatedSequence
+		 * 
+		 * Method Return		:	Void
+		 * 
+		 * Synopsis				:	This method serves as the setter for the getter method, getGeneratedSequence().
+		 * 
+		 * Modifications		:	Dates:		Developer:		Notes:
+		 * 							05/17/2021	Jared Shaddick	Initial Setup
+		 * 							05/18/2021	Jared Shaddick	Comments Added
+		 */
 		this.generatedSequence = generatedSequence;
 	}
 	
 	public int getPlayerScore() {
+		/*
+		 * Method				:	getPlayerScore()
+		 * 
+		 * Method Parameters	:	None
+		 * 
+		 * Method Return		:	int
+		 * 
+		 * Synopsis				:	This method serves as a getter method which allows User Interface 
+		 * 							to refer to	the value of the integer variable, playerScore, that 
+		 * 							is declared as a global, private variable. Which is also modified 
+		 * 							from the calculatePoints() method when the player fails to replicate
+		 * 							or succeeds to replicate the color sequence that was generated in the
+		 * 							generateColorSequence() method.
+		 * 
+		 * Modifications		:	Date:		Developer:		Notes:
+		 * 							05/17/2021	Jared Shaddick	Initial Setup
+		 * 							05/18/2021	Jared Shaddick	Comments Added
+		 */
 		return playerScore;
 	}
 
 	public void setPlayerScore(int playerScore) {
+		/*
+		 * Method				:	setPlayerScore()
+		 * 
+		 * Method Parameters	:	int playerScore
+		 * 
+		 * Method Return		:	Void
+		 * 
+		 * Synopsis				:	This method serves as the setter for the getter method, getPlayerScore().
+		 * 
+		 * Modifications		:	Dates:		Developer:		Notes:
+		 * 							05/17/2021	Jared Shaddick	Initial Setup
+		 * 							05/18/2021	Jared Shaddick	Comments Added
+		 */
 		this.playerScore = playerScore;
 	}
 	
 	public int getCurrentLevel() {
+		/*
+		 * Method				:	getCurrentLevel()
+		 * 
+		 * Method Parameters	:	None
+		 * 
+		 * Method Return		:	int
+		 * 
+		 * Synopsis				:	This method serves as a getter method which allows User Interface 
+		 * 							to refer to	the value of the integer variable, currentValue, that 
+		 * 							is declared as a global, private variable. Which is also modified 
+		 * 							from the checkLevel() method when the player achieves the level 
+		 * 							progression criteria of four.
+		 * 
+		 * Modifications		:	Date:		Developer:		Notes:
+		 * 							05/17/2021	Jared Shaddick	Initial Setup
+		 * 							05/18/2021	Jared Shaddick	Comments Added
+		 */
 		return currentLevel;
 	}
 
 	public void setCurrentLevel(int currentLevel) {
+		/*
+		 * Method				:	setCurrentLevel()
+		 * 
+		 * Method Parameters	:	int currentLevel
+		 * 
+		 * Method Return		:	Void
+		 * 
+		 * Synopsis				:	This method serves as the setter for the getter method, getCurrentLevel().
+		 * 
+		 * Modifications		:	Dates:		Developer:		Notes:
+		 * 							05/17/2021	Jared Shaddick	Initial Setup
+		 * 							05/18/2021	Jared Shaddick	Comments Added
+		 */
 		this.currentLevel = currentLevel;
 	}
 	
@@ -87,7 +207,21 @@ public class MatchGameManager {
 		return theColors;
 	}
 	
-	public int[] setColorNumbers() {
+	public int[] colorNumbersArray() {
+		/*
+		 * Method				:	createColorNumbers()
+		 * 
+		 * Method Parameters	:	None
+		 * 
+		 * Method Return		:	int[]
+		 * 
+		 * Synopsis				:	This method creates an integer array that is used by this class,
+		 * 							MatchGameManager, and the class, User Interface.
+		 * 
+		 * Modifications		:	Date:		Developer:		Notes:
+		 * 							05/15/2021	Jared Shaddick	Inital Setup
+		 * 							05/18/2021	Jared Shaddick	Comments Added
+		 */
 		int[] colorNumbers = new int[4];
 		colorNumbers[0] = 0;
 		colorNumbers[1] = 1;
@@ -112,7 +246,7 @@ public class MatchGameManager {
 		 * 							05/05/2021	Jared Shaddick	Initial Setup
 		 * 							05/06/2021	Jared Shaddick	Separated getTheColors()'s theColors Array From This Method 
 		 * 							05/10/2021	Jared Shaddick	Added 4 To Line 67 at [randomSequence.nextInt()] To Prevent 
-		 * 														Going Beyond The Length of generatedSequence (Defined At Line 62)
+		 * 														Going Beyond The Length Of generatedSequence (Defined At Line 62)
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 * 							05/11/2021	Jared Shaddick	Added Conditional To Determine If The Method Should Generate A Sequence
 		 */
@@ -123,7 +257,7 @@ public class MatchGameManager {
 		generatedSequence = new int[colorsInSequence];
 		do {
 
-			generatedSequence[indexGenerationCounter] = setColorNumbers()[randomSequence.nextInt(4)];
+			generatedSequence[indexGenerationCounter] = colorNumbersArray()[randomSequence.nextInt(4)];
 			indexGenerationCounter++;
 		}
 		while (indexGenerationCounter < colorsInSequence);
@@ -135,15 +269,16 @@ public class MatchGameManager {
 		 * 
 		 * Method Parameters	:	None
 		 * 
-		 * Method Return		:	int
+		 * Method Return		:	Void
 		 * 
-		 * Synopsis				:	This method will allow User Interface to know how many colors will be present in
-		 * 							a sequence for tracking purposes
+		 * Synopsis				:	This method will reset the colorsInSequence integer variable back to the level 
+		 * 							one default if the player's score is less than zero.
 		 * 
 		 * Modifications		:	Date:		Developer:		Notes:
 		 * 							05/05/2021	Jared Shaddick	Intitial Setup
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 * 							05/15/2021	Jared Shaddick	Modified Method
+		 * 							05/17/2021	Jared Shaddick	Modified Method
 		 */
 		if (scoreUnderZero) {
 			colorsInSequence = 3;
@@ -168,6 +303,8 @@ public class MatchGameManager {
 		 * 														User Interface In The replicateColors() Method
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 *  						05/15/2021	Jared Shaddick	Modified Method
+		 *  						05/17/2021	Jared Shaddick	Added Conditional Statement That Only Occurs When The Player's Score Is Under Zero
+		 *  						05/18/2021	Jared Shaddick	Added New Comments
 		 */
 		if (colorsReplicated) {
 			playerScore += levelSuccessScore;
@@ -206,6 +343,7 @@ public class MatchGameManager {
 		 * 							05/10/2021	Jared Shaddick	Added Parameter
 		 * 							05/11/2021	Jared Shaddick	Added Comments
 		 * 							05/15/2021	Jared Shaddick	Modified Method
+		 * 							05/18/2021	Jared Shaddick	Added New Comments
 		 */
 		allColorsMatch = false;
 		do {
@@ -229,6 +367,22 @@ public class MatchGameManager {
 		return allColorsMatch;
 	}
 	public boolean checkPoints() {
+		/*
+		 * Method				:	checkPoints()
+		 * 
+		 * Method Parameters	:	None
+		 * 
+		 * Method Return		:	boolean
+		 * 
+		 * Synopsis				:	This method will be used to determine if the player has lost all of their points
+		 * 							and have gone below zero, which results in a game over. It will also determine
+		 * 							if the player still has a score value above or equal to zero.
+		 * 
+		 * Modifications		:	Date:		Developer:		Notes:
+		 * 							05/15/2021	Jared Shaddick	Initial Setup
+		 * 							05/17/2021	Jared Shaddick	Modified Conditional Statements
+		 * 							05/18/2021	Jared Shaddick	Comments Added
+		 */
 		
 		if (playerScore < 0) {
 			scoreUnderZero = true;
@@ -240,6 +394,21 @@ public class MatchGameManager {
 		return scoreUnderZero;
 	}
 	public boolean checkLevel() {
+		/*
+		 * Method				:	checkLevel()
+		 * 
+		 * Method Parameters	:	None
+		 * 
+		 * Method Return		:	boolean
+		 * 
+		 * Synopsis				:	This method will determine if the player has reached the necessary requirements
+		 * 							for proceeding to the next level.
+		 * 
+		 * Modifications		:	Date:		Developer:		Notes:
+		 * 							05/15/2021	Jared Shaddick	Initial Setup
+		 * 							05/17/2021	Jared Shaddick	Modified Conditionals To Prevent Logic Complications
+		 * 							05/18/2021	Jared Shaddick	Added Comments
+		 */
 		boolean playerLeveledUp;
 		
 		if (allColorsMatch && levelProgress < 4) {
