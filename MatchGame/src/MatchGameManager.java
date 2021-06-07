@@ -288,7 +288,7 @@ public class MatchGameManager {
 		}
 		while (indexGenerationCounter < colorsInSequence);																			//if this conditional is met the loop will end
 	}
-	
+
 	public void numberOfColors() {
 		/*
 		 * Method				:	numberOfColors()
